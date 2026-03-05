@@ -20,3 +20,31 @@ ORDER BY
     UnitPrice DESC,
     Weight DESC,
     AvailableForSaleDate ASC;
+
+=========================
+      Exercício 03
+=========================
+
+SELECT 
+ProductName AS Produto,
+Weight AS Peso
+FROM DimProduct
+ORDER BY 
+Weight DESC
+
+=========================
+      Exercício 04
+=========================
+
+SELECT 
+
+StoreName AS Loja, 
+OpenDate AS Data_abertura, 
+EmployeeCount AS Qtd_funcionarios,
+CloseDate AS Data_fechamento
+
+From DimStore
+
+Where CloseDate is not null
+
+
