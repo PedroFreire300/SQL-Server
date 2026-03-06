@@ -47,4 +47,36 @@ From DimStore
 
 Where CloseDate is not null
 
+==========================
+      Exercício 05
+==========================
+
+SELECT 
+productkey as ID
+FROM dimproduct
+where brandname = 'Litware'
+and  AvailableForSaleDate = '20090315'
+
+==========================
+      Exercício 06
+==========================
+
+A)
+
+SELECT 
+*
+from dimStore
+where status = 'off'
+
+B) 
+
+SELECT 
+*
+from dimStore
+where CloseDate is not null
+
+
+
+
+
 
