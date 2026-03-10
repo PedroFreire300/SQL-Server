@@ -56,6 +56,49 @@ from DimStore
 where EmployeeCount = '7'
 --Contoso Europe Online Store
 
+========================
+      Exercício 04
+=========================
+
+SELECT * from DimEmployee
+
+SELECT 
+
+COUNT(Gender) AS Qtd_Masculino
+
+FROM DimEmployee
+WHERE gender = 'M'
+
+SELECT 
+
+COUNT(Gender) AS Qtd_Feminino
+
+FROM DimEmployee
+WHERE gender = 'F'
+
+B)
+
+SELECT * from DimEmployee
+
+SELECT top (1)
+
+FirstName as Nome,
+emailaddress as Email,
+hiredate as Data_Contratacao
+
+from DimEmployee
+WHERE gender = 'M'
+ORDER BY hiredate asc
+
+SELECT top (1)
+
+FirstName as Nome,
+emailaddress as Email,
+hiredate as Data_Contratacao
+
+from DimEmployee
+WHERE gender = 'F'
+ORDER BY hiredate asc
 
 
 

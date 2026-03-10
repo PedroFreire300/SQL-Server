@@ -75,6 +75,40 @@ SELECT
 from dimStore
 where CloseDate is not null
 
+==========================
+      Exercício 07
+==========================
+
+SELECT * from dimstore
+
+SELECT 
+
+StoreName AS Loja,
+EmployeeCount AS Qtd_funcionarios
+
+from dimstore
+
+WHERE EmployeeCount > 50
+
+==========================
+      Exercício 08
+==========================
+
+SELECT * FROM DimProduct
+
+SELECT
+
+Productkey AS ID,
+ProductName AS Produto,
+UnitPrice AS Preço
+
+FROM DimProduct
+
+WHERE ProductDescription like '%LCD%'
+
+
+
+
 
 
 
