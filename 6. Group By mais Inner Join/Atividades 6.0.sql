@@ -102,7 +102,31 @@ on DimProduct.ProductSubcategoryKey = DimProductSubCategory.ProductSubcategoryKe
 
 GROUP BY DimProductSubCategory.ProductSubcategoryName
 
+=========================
+      Exercício 04
+=========================
 
+SELECT TOP (1000) * FROM FactOnlineSales
+SELECT TOP (1000) * FROM DimCustomer
+
+A)
+
+SELECT 
+    DimCustomer.FirstName AS Nome,
+    DimCustomer.LastName AS Sobrenome,
+    sum(FactOnlineSales.SalesQuantity) AS Qtd_compras
+
+FROM FactOnlineSales
+INNER JOIN DimCustomer
+ON FactOnlineSales.CustomerKey = DimCustomer.CustomerKey
+GROUP BY  DimCustomer.FirstName,  DimCustomer.LastName
+HAVING DimCustomer.FirstName IS NOT NULL
+ORDER BY Qtd_compras Desc
+
+B)
+
+
+    
 
 
     

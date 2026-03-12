@@ -75,6 +75,25 @@ From DimProduct
 LEFT JOIN DimProductSubcategory
 on DimProduct.ProductSubcategoryKey = DimProductSubcategory.ProductSubcategorykey
 
+==========================
+      Exercício 05
+==========================
+
+SELECT top (100) * FROM FactStrategyPlan
+SELECT * FROM DimAccount
+
+SELECT 
+
+    FactStrategyPlan.StrategyPlanKey,
+    FactStrategyPlan.DateKey,
+    DimAccount.AccountName,
+    FactStrategyPlan.Amount
+
+From FactStrategyPlan
+INNER JOIN DimAccount
+ON FactStrategyPlan.AccountKey = DimAccount.AccountKey
+
+    
 
 
 
