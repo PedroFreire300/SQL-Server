@@ -93,7 +93,27 @@ From FactStrategyPlan
 INNER JOIN DimAccount
 ON FactStrategyPlan.AccountKey = DimAccount.AccountKey
 
-    
+
+==========================
+      Exercício 06
+==========================
+
+SELECT * FROM FactStrategyPlan
+
+SELECT * FROM DimScenario 
+
+SELECT 
+
+FactStrategyPlan.StrategyPlanKey,
+FactStrategyPlan.DateKey,
+DimScenario.ScenarioName,
+FactStrategyPlan.Amount
+
+FROM FactStrategyPlan
+INNER JOIN DimScenario
+ON FactStrategyPlan.ScenarioKey = DimScenario.ScenarioKey
+
+
 
 
 

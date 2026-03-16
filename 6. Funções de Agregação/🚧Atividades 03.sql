@@ -58,7 +58,7 @@ where EmployeeCount = '7'
 
 ========================
       Exercício 04
-=========================
+========================
 
 SELECT * from DimEmployee
 
@@ -99,6 +99,10 @@ hiredate as Data_Contratacao
 from DimEmployee
 WHERE gender = 'F'
 ORDER BY hiredate asc
+
+========================
+      Exercício 05
+========================
 
 
 

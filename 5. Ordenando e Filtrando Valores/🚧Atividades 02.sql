@@ -106,6 +106,20 @@ FROM DimProduct
 
 WHERE ProductDescription like '%LCD%'
 
+==========================
+      Exercício 09
+==========================
+
+SELECT * FROM DimProduct
+
+SELECT  
+
+Brandname AS Marca,
+Colorname AS Cor 
+
+From DimProduct
+Where BrandName in ('Contoso', 'Litware','Fabrikam') and 
+ColorName in ('Green','Orange','Black','Black','Silver','Pink')
 
 
 

@@ -107,15 +107,72 @@ where CustomerKey = 19037
 GROUP BY productKey
 ORDER BY Qtd_maxima DESC
 
+========================
+      Exercício 04
+========================
 
+SELECT * FROM DimProduct
 
+A)
 
+SELECT
 
+BrandName as 'Marca',
+Count(ProductKey) as 'Qtd_Total'
 
+FROM DimProduct
+GROUP BY Brandname
 
+B)
 
+SELECT
 
+ClassName as 'Classe',
+AVG(UnitPrice) as 'Média_unit'
 
+FROM DimProduct
+GROUP BY ClassName
+
+C)
+
+SELECT
+
+ColorName as 'Cor',
+Sum(Weight) as 'Peso'
+
+FROM DimProduct
+GROUP BY ColorName
+ORDER BY Peso Desc
+
+========================
+      Exercício 05
+========================
+
+SELECT * FROM DimProduct
+
+SELECT 
+
+StockTypeName,
+sum(Weight) as Peso
+
+From DimProduct 
+GROUP BY StockTypeName,BrandName
+HAVING BrandName in ('Contoso')
+ORDER BY StockTypeName DESC
+
+========================
+      Exercício 06
+========================
+
+SELECT * FROM DimProduct
+
+SELECT  
+
+BrandName as 'Marca',
+COUNT(DISTINCT ColorName) as 'Qtd_cores'
+
+From DimProduct
+GROUP BY BrandName
 
 
 

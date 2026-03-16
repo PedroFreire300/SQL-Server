@@ -125,8 +125,28 @@ ORDER BY Qtd_compras Desc
 
 B)
 
-
+=========================
+      Exercício 05
+=========================
     
+SELECT * FROM FACTONLINESALES
+SELECT * FROM DimCustomer
+
+SELECT
+
+DimCustomer.Gender as Genêro,
+Sum(FACTONLINESALES.SalesQuantity) as Qtd_Compras
+
+From FACTONLINESALES 
+INNER JOIN DimCustomer
+ON FACTONLINESALES.CustomerKey = DimCustomer.CustomerKey
+GROUP BY DimCustomer.Gender
+HAVING DimCustomer.Gender is not null
+
+=========================
+      Exercício 06
+=========================
+
 
 
     
