@@ -112,6 +112,14 @@ FactStrategyPlan.Amount
 FROM FactStrategyPlan
 INNER JOIN DimScenario
 ON FactStrategyPlan.ScenarioKey = DimScenario.ScenarioKey
+where ScenarioName is null 
+
+
+==========================
+      Exercício 07
+==========================
+
+
 
 
 

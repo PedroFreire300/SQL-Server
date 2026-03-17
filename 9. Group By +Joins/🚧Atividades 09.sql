@@ -147,9 +147,19 @@ HAVING DimCustomer.Gender is not null
       Exercício 06
 =========================
 
+SELECT * FROM FACTEXCHANGERATE
+SELECT * FROM DimCurrency
 
+SELECT 
 
-    
+DimCurrency.CurrencyDescription,
+FACTEXCHANGERATE.AverageRate
+
+FROM FACTEXCHANGERATE
+INNER JOIN DimCurrency
+ON FACTEXCHANGERATE.CurrencyKey = DimCurrency.CurrencyKey
+where FACTEXCHANGERATE.AverageRate BETWEEN 10 and 100
+ORDER BY FACTEXCHANGERATE.AverageRate Desc
 
 
     
