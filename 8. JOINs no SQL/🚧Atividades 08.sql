@@ -104,26 +104,42 @@ SELECT * FROM DimScenario
 
 SELECT 
 
-FactStrategyPlan.StrategyPlanKey,
-FactStrategyPlan.DateKey,
-DimScenario.ScenarioName,
-FactStrategyPlan.Amount
+FactStrategyPlan.StrategyPlanKey AS 'ID',
+FactStrategyPlan.DateKey AS 'Data',
+DimScenario.ScenarioName AS 'SlA',
+FORMAT(FactStrategyPlan.Amount,'C') AS 'Montante'
 
 FROM FactStrategyPlan
 INNER JOIN DimScenario
 ON FactStrategyPlan.ScenarioKey = DimScenario.ScenarioKey
-where ScenarioName is null 
-
+ORDER BY 'ID' ASC
 
 ==========================
       Exercício 07
 ==========================
 
+--REFAZER
 
+==========================
+      Exercício 08
+==========================
 
+SELECT * FROM DimProduct 
+SELECT * FROM DimChannel
+SELECT * FROM FactSales
 
+SELECT 
 
+DimProduct.BrandName AS 'Marca',
+DimChannel.ChannelName AS 'Canal de Venda'
 
+FROM FactSales
+INNER JOIN DimChannel
+ON FactSales.ChannelKey = DimChannel.ChannelKey
+INNER JOIN DimProduct
+ON FactSales.Productkey = DimProduct.ProductKey
+GROUP BY DimProduct.BrandName,DimChannel.ChannelName
+HAVING Brandname in ('Contoso','Fabrikam','Litware')
 
 
 

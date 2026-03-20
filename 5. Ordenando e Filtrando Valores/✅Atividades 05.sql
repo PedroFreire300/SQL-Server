@@ -121,10 +121,19 @@ From DimProduct
 Where BrandName in ('Contoso', 'Litware','Fabrikam') and 
 ColorName in ('Green','Orange','Black','Black','Silver','Pink')
 
+==========================
+      Exercício 10
+==========================
 
+SELECT * FROM DimProduct
 
+SELECT 
 
+ProductName AS 'NomeProduto',
+UnitPrice AS 'PreçoUnit'
 
-
-
+FROM DimProduct
+WHERE ProductName LIKE ('Contoso%' and '%silver') 
+and UnitPrice BETWEEN 10 and 30
+ORDER BY UnitPrice DESC
 

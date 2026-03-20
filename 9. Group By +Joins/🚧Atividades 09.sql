@@ -161,5 +161,37 @@ ON FACTEXCHANGERATE.CurrencyKey = DimCurrency.CurrencyKey
 where FACTEXCHANGERATE.AverageRate BETWEEN 10 and 100
 ORDER BY FACTEXCHANGERATE.AverageRate Desc
 
+=========================
+      Exercício 07
+=========================
 
-    
+SELECT * FROM FactStrategyPlan
+SELECT * FROM DimScenario
+
+SELECT
+
+DimScenario.ScenarioName AS 'NAME',
+format(Sum(FactStrategyPlan.Amount), 'C') AS 'TOTAL'
+
+FROM FactStrategyPlan
+INNER JOIN DimScenario
+ON FactStrategyPlan.ScenarioKey = DimScenario.ScenarioKey
+GROUP BY DimScenario.ScenarioName
+HAVING DimScenario.ScenarioName in ('Actual','Budget')
+ORDER BY 'TOTAL' DESC
+
+=========================
+      Exercício 08
+=========================
+SELECT * FROM FactStrategyPlan
+
+SELECT DISTINCT 
+
+Datekey AS 'Ano',
+FORMAT(sum(amount),'c') AS 'Total'
+
+FROM FactStrategyPlan
+GROUP BY Datekey
+HAVING Datekey in('2007','2008','2009')
+
+SELECT * FROM DimDate

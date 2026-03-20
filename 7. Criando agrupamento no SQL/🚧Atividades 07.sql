@@ -174,10 +174,36 @@ COUNT(DISTINCT ColorName) as 'Qtd_cores'
 From DimProduct
 GROUP BY BrandName
 
+========================
+      Exercício 07
+========================
 
+SELECT * FROM DimCustomer
 
+SELECT
 
+Gender AS "Genêro",
+FORMAT(AVG(YearlyIncome),'C') AS 'Média Salarial'
 
+FROM DimCustomer
+GROUP BY Gender
+HAVING Gender IS NOT NULL
+
+========================
+      Exercício 08
+========================
+
+SELECT * FROM DimCustomer
+
+SELECT 
+
+count(*) AS 'Qtd_clientes',
+Education AS 'Escolaridade',
+FORMAT(AVG(YearlyIncome),'C') AS 'Média Salarial'
+
+FROM DimCustomer
+GROUP BY Education
+HAVING Education is not null
 
 
 

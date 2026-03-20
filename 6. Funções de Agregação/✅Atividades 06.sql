@@ -104,8 +104,17 @@ ORDER BY hiredate asc
       Exercício 05
 ========================
 
+SELECT * FROM DimProduct 
 
+SELECT
 
+COUNT (DISTINCT ProductName) AS 'QtdCores',
+COUNT (DISTINCT BrandName) AS 'QtdMarcas',
+COUNT (DISTINCT ClassName) AS 'QtdClasses'
+
+FROM 
+
+DimProduct
 
 
 
