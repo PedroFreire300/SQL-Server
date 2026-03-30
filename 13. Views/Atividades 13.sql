@@ -1,0 +1,59 @@
+-- =============================================
+-- ! RESUMO – VIEWS NO SQL SERVER
+-- =============================================
+-- * Uma VIEW é uma consulta salva no banco de dados
+-- * Pode ser utilizada como se fosse uma tabela
+-- * A VIEW não armazena dados, apenas o SELECT
+-- * Muito usada para relatórios e consultas complexas
+------------------------------------------------------
+
+-- =============================================
+-- ? PARA QUE SERVE UMA VIEW
+-- =============================================
+-- * Simplificar consultas grandes
+-- * Reutilizar consultas
+-- * Segurança de acesso aos dados
+-- * Organizar regras de negócio
+-- * Base para relatórios (Power BI, Excel, sistemas)
+-----------------------------------------------------
+
+-- =============================================
+-- ! O QUE PODE TER EM UMA VIEW
+-- =============================================
+-- * SELECT
+-- * JOIN
+-- * WHERE
+-- * GROUP BY
+-- * HAVING
+-- * CASE
+-- * Funções (SUM, COUNT, AVG, etc.)
+-- * Subquery
+-- * CTE
+--------
+
+-- =============================================
+-- ! O QUE NÃO PODE TER EM UMA VIEW
+-- =============================================
+-- * DECLARE
+-- * SET
+-- * PRINT
+-- * INSERT / UPDATE / DELETE
+-- * Variáveis
+-- * Tabela temporária (#Tabela)
+-- * PROCEDURE
+--------------
+
+-- =============================================
+-- * ESTRUTURA BÁSICA
+-- =============================================
+-- CREATE VIEW nome_da_view
+-- AS
+-- SELECT colunas
+-- FROM tabelas
+-- WHERE condição
+-----------------
+
+-- =============================================
+-- TODO: Sempre usar prefixo vw_ no nome das views
+-- Exemplo: vw_Clientes, vw_Vendas, vw_Faturamento
+-- =============================================
