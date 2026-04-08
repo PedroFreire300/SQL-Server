@@ -197,13 +197,25 @@ SELECT * FROM DimCustomer
 
 SELECT 
 
-count(*) AS 'Qtd_clientes',
-Education AS 'Escolaridade',
-FORMAT(AVG(YearlyIncome),'C') AS 'Média Salarial'
+Education as Diploma,
+AVG(YearlyIncome) as MediaSalarial,
+COUNT(*) as QtdClientes
 
 FROM DimCustomer
 GROUP BY Education
-HAVING Education is not null
+HAVING Education is NOT NULL
 
+========================
+      Exercício 09
+========================
 
+SELECT * FROM DimEmployee
 
+SELECT 
+
+DepartmentName as Departamento,
+COUNT (*) as QdtFuncionarios
+
+FROM DimEmployee
+WHERE EndDate is NULL
+GROUP BY DepartmentName

@@ -98,3 +98,9 @@ DECLARE
 
 PRINT
 CONCAT ('Meu nome é ', @nome,' , nasci em ', @data_nascimento,' e tenho ', @num_pets, ' pets')
+
+=========================
+      Exercício 04
+=========================
+
+-- refazer

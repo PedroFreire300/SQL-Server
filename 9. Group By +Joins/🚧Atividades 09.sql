@@ -183,6 +183,7 @@ ORDER BY 'TOTAL' DESC
 =========================
       Exercício 08
 =========================
+
 SELECT * FROM FactStrategyPlan
 
 SELECT DISTINCT 
@@ -194,4 +195,21 @@ FROM FactStrategyPlan
 GROUP BY Datekey
 HAVING Datekey in('2007','2008','2009')
 
-SELECT * FROM DimDate
+=========================
+      Exercício 09
+=========================
+
+SELECT * FROM DimProduct
+SELECT * FROM DimProductSubcategory
+
+SELECT
+
+DPS.ProductSubcategoryName as NomeCategoria,
+COUNT (*) as QtdProdutos
+
+FROM DimProduct DP
+INNER JOIN DimProductSubcategory DPS
+ON DP.ProductSubcategoryKey = DPS.ProductSubcategoryKey
+WHERE BrandName = 'Contoso' and ColorName = 'Silver'
+GROUP BY DPS.ProductSubcategoryName
+

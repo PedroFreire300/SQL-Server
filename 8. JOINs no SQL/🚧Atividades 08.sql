@@ -118,7 +118,17 @@ ORDER BY 'ID' ASC
       Exercício 07
 ==========================
 
---REFAZER
+SELECT * FROM DimProduct
+SELECT * FROM DimProductSubcategory
+
+SELECT 
+
+ProductSubcategoryName
+
+FROM DimProduct 
+RIGHT JOIN DimProductSubcategory
+ON DimProduct.ProductSubcategoryKey = DimProductSubcategory.ProductSubcategoryKey
+WHERE ProductName IS NULL
 
 ==========================
       Exercício 08
@@ -141,6 +151,25 @@ ON FactSales.Productkey = DimProduct.ProductKey
 GROUP BY DimProduct.BrandName,DimChannel.ChannelName
 HAVING Brandname in ('Contoso','Fabrikam','Litware')
 
+==========================
+      Exercício 09
+==========================
+
+SELECT * FROM FactOnlineSales --Tabela Principal (Chave estrangeira)
+SELECT * FROM DimPromotion -- Tabeça Segundaria (Chave primaria)
+
+SELECT TOP (10000)
+
+FOS.OnlineSalesKey,
+FOS.DateKey,
+DP.PromotionName,
+FOS.SalesAmount
+
+FROM FactOnlineSales FOS
+INNER JOIN DimPromotion DP
+on FOS.PromotionKey = DP.PromotionKey
+WHERE PromotionName = 'No Discount'
+ORDER BY DateKey ASC
 
 
 
