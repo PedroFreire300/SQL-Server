@@ -102,3 +102,26 @@ RIGHT JOIN DimProductSubcategory
 ON DimProduct.ProductSubcategoryKey = DimProductSubcategory.ProductSubcategoryKey
 GROUP BY DimProductSubcategory.ProductSubcategoryName
 HAVING Sum(DimProduct.Weight) is NOT NULL
+
+=========================
+      Exercício 05
+=========================
+
+SELECT * FROM DimCustomer
+
+SELECT 
+
+FirstName AS Nome,
+Gender AS Sexo,
+TotalChildren AS 'Qtd.Filhos',
+EmailAddress AS 'E-mail',
+
+CASE 
+
+    WHEN Gender = 'F' AND TotalChildren > 0 THEN 'Sorteio Mãe do Ano'
+    WHEN Gender = 'M' AND TotalChildren > 0 THEN 'Sorteio Pai do Ano'
+    ELSE 'Caminhão de Prêmios'
+
+END AS SorteioCategoria
+
+FROM DimCustomer

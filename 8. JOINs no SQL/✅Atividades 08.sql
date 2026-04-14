@@ -171,5 +171,30 @@ on FOS.PromotionKey = DP.PromotionKey
 WHERE PromotionName = 'No Discount'
 ORDER BY DateKey ASC
 
+==========================
+      Exercício 10
+==========================
 
+SELECT TOP (1000) * FROM FactSales --Tabela principal
+SELECT * FROM DimChannel --ChannelKey
+SELECT * FROM DimStore --Storekey
+SELECT * FROM DimProduct --ProductKey
+
+SELECT
+
+FS.Saleskey,
+DC.ChannelName,
+DS.StoreName,
+DP.ProductName,
+FS.SalesAmount
+
+FROM FactSales FS
+INNER JOIN DimChannel DC 
+ON FS.ChannelKey = DC.ChannelKey
+INNER JOIN DimStore DS
+ON FS.Storekey = DS.Storekey
+INNER JOIN DimProduct DP 
+ON FS.ProductKey = DP.ProductKey
+
+ORDER BY SalesAmount Desc
 

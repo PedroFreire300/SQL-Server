@@ -51,23 +51,52 @@ AS StyleName
 FROM DimProduct
 
 =========================
-
-SELECT TOP (9) reverse(stuff(reverse(StyleName),2,1,'#'))
-
-FROM DimProduct
-
-=========================
       Exercício 03
 =========================
 
 SELECT * FROM DimEmployee
 
-SELECT 
+SELECT
 
-CONCAT(FirstName,' ', LastName) AS 'Nome',
-EmailAddress AS 'E-mail',
-LEFT (EmailAddress, charindex('@',EmailAddress)-1) as 'ID do e-mail',
-
-CONCAT (UPPER(LEFT (EmailAddress, charindex('@',EmailAddress)-1)) , DAY(BirthDate)) AS 'Senha'
+CONCAT(FirstName,' ',LastName) AS Nome,
+EmailAddress AS Email,
+left(EmailAddress,CHARINDEX('@',EmailAddress)-1) AS ID,
+CONCAT(upper(FirstName),day(BirthDate)) AS Senha
 
 FROM DimEmployee
+
+=========================
+      Exercício 04
+=========================
+
+SELECT * FROM DimCustomer
+
+SELECT
+
+FirstName AS Nome, 
+EmailAddress AS Email,
+AddressLine1 AS Endereço,
+DateFirstPurchase AS DataPrimeiraCompra
+
+FROM DimCustomer
+WHERE YEAR(DateFirstPurchase) = 2001
+ORDER BY DateFirstPurchase DESC
+
+=========================
+      Exercício 05
+=========================
+
+SELECT * FROM DimEmployee 
+
+SELECT 
+
+FirstName AS Nome,
+EmailAddress AS Email,
+HireDate AS DataContratação,
+DAY(HireDate) AS Dia,
+DATENAME(MONTH,MONTH(HireDate)) AS Mês,
+YEAR(HireDate) AS Ano
+
+FROM 
+
+DimEmployee

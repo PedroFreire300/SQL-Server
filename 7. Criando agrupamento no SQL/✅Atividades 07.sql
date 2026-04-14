@@ -219,3 +219,21 @@ COUNT (*) as QdtFuncionarios
 FROM DimEmployee
 WHERE EndDate is NULL
 GROUP BY DepartmentName
+
+========================
+      Exercício 10
+========================
+
+SELECT * FROM DimEmployee
+
+SELECT 
+
+Title AS Cargo,
+sum(VacationHours) AS Total
+
+FROM DimEmployee
+WHERE Gender = 'F' AND DepartmentName in ('Production','Marketing','Engineering','Finance') AND
+HireDate BETWEEN '1999' AND '2000'
+GROUP BY Title
+
+

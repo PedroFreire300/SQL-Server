@@ -103,4 +103,34 @@ CONCAT ('Meu nome é ', @nome,' , nasci em ', @data_nascimento,' e tenho ', @num
       Exercício 04
 =========================
 
--- refazer
+SELECT * FROM DimStore
+
+-- ! Refazer
+-- Criação de uma variável chamada @lista
+-- Ela vai armazenar TEXTO (VARCHAR) com no máximo 50 caracteres
+DECLARE @lista VARCHAR(50)
+
+-- Inicializa a variável vazia, por usamos o set
+-- * Isso é MUITO importante, porque vamos "somar" textos depois
+SET @lista = ''
+
+-- Aqui começa a parte MAIS IMPORTANTE do exercício
+-- ! Esse SELECT não está retornando tabela... ele está funcionando como um LOOP escondido
+
+SELECT 
+    @lista = @lista + StoreName + ' e '
+    -- Tradução mental:
+    -- "Para cada linha encontrada, pegue o valor atual de @lista
+    -- e adicione o nome da loja + ' e ' no final"
+
+FROM DimStore
+
+-- Filtra apenas lojas fechadas em 2008
+-- (OBS: isso não é a melhor prática, mas funciona)
+WHERE CloseDate LIKE '%2008%'
+
+-- Aqui o SQL já terminou o "loop escondido"
+-- e a variável @lista agora contém TODOS os nomes concatenados
+
+PRINT 'As lojas fechadas no ano de 2008 foram: ' + @lista
+-- Exibe o resultado final juntando texto fixo + variável
