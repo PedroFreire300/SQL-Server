@@ -47,7 +47,6 @@ FORMAT(Sum(FS.SalesAmount), 'C') AS ValorProdutoTotal,
 
 FORMAT(Sum(FS.SalesAmount) * @imposto, 'C') AS Imposto
 
-
 FROM FactSales FS
 INNER JOIN DimStore DS
 ON FS.StoreKey = DS.StoreKey
