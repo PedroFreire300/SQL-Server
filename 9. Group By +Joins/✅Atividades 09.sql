@@ -213,3 +213,21 @@ ON DP.ProductSubcategoryKey = DPS.ProductSubcategoryKey
 WHERE BrandName = 'Contoso' and ColorName = 'Silver'
 GROUP BY DPS.ProductSubcategoryName
 
+=========================
+      Exercício 10
+=========================
+
+SELECT * FROM DimProduct
+SELECT * FROM DimProductSubcategory
+
+SELECT 
+
+      DP.BrandName,
+      DPS.ProductSubcategoryName,
+      COUNT (*) AS Qtd_Produtos
+
+FROM DimProduct DP
+INNER JOIN DimProductSubcategory DPS
+ON DP.ProductSubcategoryKey = DPS.ProductSubcategoryKey
+GROUP BY DP.BrandName,DPS.ProductSubcategoryName
+ORDER BY BrandName
