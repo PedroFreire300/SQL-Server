@@ -55,7 +55,20 @@ WHERE CONCAT ( FirstName,' ',LastName)  = 'Miguel Severino'
 
 SELECT * FROM DimCustomer
 
--- Refazer
+DECLARE @teste int = 
+(SELECT avg(YearlyIncome) FROM DimCustomer WHERE CustomerType = 'Person')
+
+
+SELECT
+
+      CustomerKey AS Chave,
+      FirstName + ' ' + LastName AS Nome,
+      EmailAddress AS Email,
+      YearlyIncome AS Salário
+
+FROM DimCustomer
+WHERE CustomerType = 'Person' AND
+YearlyIncome > @teste
 
 =========================
       Exercício 05

@@ -100,3 +100,24 @@ YEAR(HireDate) AS Ano
 FROM 
 
 DimEmployee
+
+=========================
+      Exercício 06
+=========================
+
+SELECT * FROM DimStore
+
+SELECT TOP (1)
+
+StoreName AS Nome,
+DATEDIFF(day,OpenDate, getdate()) AS Dias
+
+FROM DimStore
+GROUP BY StoreName,OpenDate
+ORDER BY Dias ASC
+
+SELECT
+
+min(DATEDIFF(day,OpenDate, getdate())) AS Dias
+
+FROM DimStore
