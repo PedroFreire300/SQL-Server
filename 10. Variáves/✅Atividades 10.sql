@@ -134,3 +134,33 @@ WHERE CloseDate LIKE '%2008%'
 
 PRINT 'As lojas fechadas no ano de 2008 foram: ' + @lista
 -- Exibe o resultado final juntando texto fixo + variável
+
+"DECLARE @lista VARCHAR(MAX)
+
+SET @lista = ''
+
+SELECT
+    @lista = @lista + StoreName + ' e '
+FROM DimStore
+WHERE YEAR(CloseDate) = 2008
+
+PRINT 'As lojas fechadas no ano de 2008 foram: ' + @lista"
+
+=========================
+      Exercício 05
+=========================
+
+Select * from DimProduct
+select * from DimProductSubcategory
+
+declare @nome varchar(30) = 'Lamps'
+
+select 
+
+      DP.ProductName as Produto,
+      DPS.ProductSubcategoryName as Categoria
+
+from DimProduct DP
+INNER JOIN DimProductSubcategory DPS
+on DP.ProductSubcategoryKey = DPS.ProductSubcategoryKey
+where ProductSubcategoryName = @nome

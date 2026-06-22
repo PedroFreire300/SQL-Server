@@ -125,3 +125,28 @@ CASE
 END AS SorteioCategoria
 
 FROM DimCustomer
+
+=========================
+      Exercício 06
+=========================
+
+SELECT * FROM DimStore
+
+select 
+
+StoreName as NomeLoja,
+DATEDIFF(DAY,OpenDate,GETDATE()) as TempoAtividadeDias
+
+from DimStore
+where CloseDate is NULL
+ORDER BY TempoAtividadeDias desc
+
+SELECT
+    StoreName,
+    OpenDate,
+    CloseDate,
+    CASE
+        WHEN CloseDate IS NULL THEN DATEDIFF(DAY, OpenDate, GETDATE())
+        ELSE DATEDIFF(DAY, OpenDate, CloseDate)
+    END AS 'Dias de atividade'
+FROM DimStore
