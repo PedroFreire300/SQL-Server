@@ -79,7 +79,7 @@ drop column Peso
 alter table Cliente --Alterar tipo 
 alter column Email varchar(100) not null;
 
-update  Cliente -- Atualizar 
+update Cliente -- Atualizar 
 set Peso = 75
 where IdCliente = 12
 

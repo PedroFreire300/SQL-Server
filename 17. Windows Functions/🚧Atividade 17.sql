@@ -4,12 +4,10 @@
 
 select * from vwProdutos
 
-select 
-
-    vwProdutos.*,
-    sum(Quantidade_Vendida) over() as Qtd_Vendida_Total
-
-from vwProdutos 
+select
+      *,
+      sum(Receita_Total) over() as Qtd_Total_Vendida
+from vwProdutos
 
 =========================
       Exercício 02
@@ -26,14 +24,14 @@ from vwProdutos
 =========================
       Exercício 03       --Refazer
 ========================= 
-select 
-
-    vwProdutos.*,
-    sum(Quantidade_Vendida) over() as Qtd_Vendida_Total,
-    sum(Quantidade_Vendida) over(partition by Marca) as Qtd_Vendida_Total_Marca,
-    format(1.0*(sum(Quantidade_Vendida) over(partition by Marca))/sum(Quantidade_Vendida) over(), '0.00%') as "% Por Vendas"
-
+select
+      *,
+      sum(Quantidade_Vendida) over() as Qtd_Vendida_Total,
+      sum(Quantidade_Vendida) over(PARTITION BY Marca) as Qtd_Vendida_Total_Marca,
+      format(sum(Receita_Total) over(partition by Marca)/
+      sum(Receita_Total) over(),  '0.00%') as 'Porcentagem'
 from vwProdutos
+
 =========================
       Exercício 04       
 =========================
@@ -41,7 +39,7 @@ select
     Marca,
     Cor,
     Quantidade_Vendida,
-    rank() over(ORDER BY Quantidade_Vendida desc) as Rank
+    ROW_NUMBER() over(ORDER BY Quantidade_Vendida desc) as Rank
 from vwProdutos
 where Marca = 'Contoso'
 
