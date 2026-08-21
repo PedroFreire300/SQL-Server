@@ -17,7 +17,6 @@ SELECT
 
 FROM DimCustomer
 
-
 WHERE occupation = 'Professional'
 
 ========================
