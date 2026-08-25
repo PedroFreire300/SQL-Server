@@ -18,7 +18,7 @@ SELECT * INTO NovaTabela FROM TabelaOriginal;
 PROCURAR UMA COLUNA PELO NOME
 =====================
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS
-WHERE COLUMN_NAME = 'NomeDaColuna';
+WHERE COLUMN_NAME = 'CustomerKey';
 
 =====================
 DEFINIÇÃO DE UMA VIEW EXISTENTE
