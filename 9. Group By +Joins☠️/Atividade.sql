@@ -1,233 +1,183 @@
 =========================
       Exercício 01
 =========================
-
-A) 
-
-SELECT TOP (1000) * FROM FactSales
-SELECT top (1000) * FROM DimChannel
-
-SELECT
-    DimChannel.ChannelName AS Nome,
-    SUM(FactSales.SalesAmount) AS Qtd_vendas
-
-FROM FactSales
-INNER JOIN DimChannel
-ON FactSales.ChannelKey = DimChannel.ChannelKey
-GROUP BY DimChannel.ChannelName
-ORDER BY Qtd_vendas DESC
+A)
+select
+    DC.ChannelName as NomeCanal,
+    sum(SalesQuantity) as QtdTotalVendida
+from FactSales FC
+inner join DimChannel DC
+on FC.ChannelKey = DC.ChannelKey
+group by ChannelName
+order by QtdTotalVendida desc
 
 B)
-
-SELECT TOP (1000) * FROM FactSales
-SELECT top (1000) * FROM DimStore
-
-SELECT 
-    DimStore.StoreName as Loja,
-    sum(FactSales.SalesQuantity) as Total_vendas,
-    sum(FactSales.ReturnQuantity) as Devoluções
-
-FROM FactSales
-INNER JOIN DimStore
-On FactSales.Storekey = DimStore.StoreKey
-GROUP BY DimStore.StoreName
-ORDER BY Total_vendas Desc
+select
+    DS.StoreName as NomeLoja,
+    sum(SalesQuantity) as QtdTotalVendida,
+    sum(ReturnQuantity) as QtdTotalDevolvida
+from FactSales FC
+inner join DimStore DS
+on FC.StoreKey = DS.StoreKey
+group by StoreName
 
 C)
-
-SELECT TOP (1000) * FROM FactSales
-SELECT TOP (1000) * FROM DimDate
-
-select 
-
-    DimDate.CalendarYear AS ANO,
-    DimDate.CalendarMonthLabel as MÊS,
-    sum(FactSales.SalesAmount) as TOTAL
-
-from factsales
-inner join DimDate
-On FactSales.Datekey = DimDate.Datekey
-group by DimDate.CalendarYear, DimDate.CalendarMonthLabel
-order by ANO,MÊS desc
+select
+    DD.CalendarMonthLabel,
+    DD.CalendarYear,
+    sum(SalesAmount) as QtdTotalVendida
+from FactSales FS
+inner join DimDate DD
+on FS.DateKey = DD.DateKey
+group by  CalendarMonthLabel,CalendarYear
+order by CalendarYear,dbo.NumAno(CalendarMonthLabel)
 
 =========================
       Exercício 02
 =========================
-
-SELECT * FROM DimProduct
-SELECT * FROM FactSales
-
 A)
-
-SELECT top (1)
-    DimProduct.ColorName AS Cor,
-    sum(FactSales.SalesQuantity) AS Qtd_vendida
-
-From DimProduct
-INNER JOIN FactSales
-On DimProduct.ProductKey = FactSales.ProductKey
-GROUP BY DimProduct.ColorName
-ORDER by Qtd_vendida desc
+select
+    DP.ColorName as Cor,
+    sum(SalesQuantity) as QtdTotal
+from FactSales FS
+inner join DimProduct DP
+on FS.Productkey = DP.ProductKey
+group by ColorName
 
 B)
-
-SELECT
-    DimProduct.ColorName AS Cor,
-    sum(FactSales.SalesQuantity) AS Qtd_vendida
-
-From DimProduct
-INNER JOIN FactSales
-On DimProduct.ProductKey = FactSales.ProductKey
-GROUP BY DimProduct.ColorName
-HAVING sum(FactSales.SalesQuantity) > 3000000
+with CTE_Filto3k as (
+select
+    DP.ColorName as Cor,
+    sum(SalesQuantity) as QtdTotal
+from FactSales FS
+inner join DimProduct DP
+on FS.Productkey = DP.ProductKey
+group by ColorName )
+select * from CTE_Filto3k
+where QtdTotal > 3000000
 
 =========================
       Exercício 03
 =========================
-
-SELECT * FROM FactSales
-SELECT * FROM DimProduct --tem a chave secundaria de productsubcategorykey
-SELECT * FROM DimProductSubCategory -- 
-
-SELECT
-
-    DimProductSubCategory.ProductSubcategoryName as Categoria,
-    sum(FactSales.SalesQuantity) as Qtd_vendida
-
-from DimProduct
-INNER JOIN DimProductSubCategory
-on DimProduct.ProductSubcategoryKey = DimProductSubCategory.ProductSubcategoryKey
-    INNER JOIN FactSales
-    on DimProduct.ProductKey = FactSales.SalesKey
-
-GROUP BY DimProductSubCategory.ProductSubcategoryName
+select
+    DPC.ProductCategoryName as NomeProdutoCategoria,
+    sum(SalesQuantity) as QtdTotal
+from FactSales FS
+inner join DimProduct DP
+on FS.ProductKey = DP.ProductKey
+inner join DimProductSubcategory DPS
+on DP.ProductSubcategoryKey = DPS.ProductSubcategoryKey
+inner join DimProductCategory DPC
+on DPS.ProductCategoryKey = DPC.ProductCategoryKey
+group by DPC.ProductCategoryName
+order by QtdTotal desc
 
 =========================
       Exercício 04
 =========================
-
-SELECT TOP (1000) * FROM FactOnlineSales
-SELECT TOP (1000) * FROM DimCustomer
-
 A)
-
-SELECT 
-    DimCustomer.FirstName AS Nome,
-    DimCustomer.LastName AS Sobrenome,
-    sum(FactOnlineSales.SalesQuantity) AS Qtd_compras
-
-FROM FactOnlineSales
-INNER JOIN DimCustomer
-ON FactOnlineSales.CustomerKey = DimCustomer.CustomerKey
-GROUP BY  DimCustomer.FirstName,  DimCustomer.LastName
-HAVING DimCustomer.FirstName IS NOT NULL
-ORDER BY Qtd_compras Desc
+select top 1
+    DC.CustomerKey,
+    concat(FirstName,' ',LastName) as NomeCompleto,
+    sum(SalesQuantity) as QtdComprasTotal
+from FactOnlineSales FS
+inner join DimCustomer DC
+on FS.CustomerKey = DC.CustomerKey
+where CustomerType = 'Person'
+group by concat(FirstName,' ',LastName),DC.CustomerKey
+order by QtdComprasTotal desc
 
 B)
+with CTE_NomeProduto as (
+select top 10
+    ProductKey,
+    sum( as QtdCompras
+from FactOnlineSales
+where CustomerKey = 7665
+group by ProductKey
+order by QtdCompras desc
+) select 
+    DP.ProductName,
+    CTE.QtdCompras
+from CTE_NomeProduto CTE
+inner join DimProduct DP
+on CTE.ProductKey = DP.ProductKey
+order by QtdCompras desc
 
 =========================
       Exercício 05
 =========================
-    
-SELECT * FROM FACTONLINESALES
-SELECT * FROM DimCustomer
-
-SELECT
-
-DimCustomer.Gender as Genêro,
-Sum(FACTONLINESALES.SalesQuantity) as Qtd_Compras
-
-From FACTONLINESALES 
-INNER JOIN DimCustomer
-ON FACTONLINESALES.CustomerKey = DimCustomer.CustomerKey
-GROUP BY DimCustomer.Gender
-HAVING DimCustomer.Gender is not null
+select
+    DC.Gender as Sexo,
+    sum(SalesQuantity) as QtdTotal
+from FactOnlineSales FS
+inner join DimCustomer DC
+on FS.CustomerKey = DC.CustomerKey
+group by DC.Gender
+having DC.Gender is not null
 
 =========================
       Exercício 06
 =========================
-
-SELECT * FROM FACTEXCHANGERATE
-SELECT * FROM DimCurrency
-
-SELECT 
-
-DimCurrency.CurrencyDescription,
-FACTEXCHANGERATE.AverageRate
-
-FROM FACTEXCHANGERATE
-INNER JOIN DimCurrency
-ON FACTEXCHANGERATE.CurrencyKey = DimCurrency.CurrencyKey
-where FACTEXCHANGERATE.AverageRate BETWEEN 10 and 100
-ORDER BY FACTEXCHANGERATE.AverageRate Desc
+select  
+    DC.CurrencyDescription,
+    avg(AverageRate) as TaxaCambioMedia
+from FactExchangeRate FC
+inner join DimCurrency DC
+on FC.CurrencyKey = DC.CurrencyKey
+group by DC.CurrencyDescription
+having avg(AverageRate) between 10 and 100
 
 =========================
       Exercício 07
 =========================
+select top 100 * from FactStrategyPlan
+select * from DimScenario
 
-SELECT * FROM FactStrategyPlan
-SELECT * FROM DimScenario
-
-SELECT
-
-DimScenario.ScenarioName AS 'NAME',
-format(Sum(FactStrategyPlan.Amount), 'C') AS 'TOTAL'
-
-FROM FactStrategyPlan
-INNER JOIN DimScenario
-ON FactStrategyPlan.ScenarioKey = DimScenario.ScenarioKey
-GROUP BY DimScenario.ScenarioName
-HAVING DimScenario.ScenarioName in ('Actual','Budget')
-ORDER BY 'TOTAL' DESC
+select
+    DS.ScenarioName as NomeCenario,
+    sum(Amount) as Total
+from FactStrategyPlan FSP
+inner join DimScenario DS
+on FSP.ScenarioKey = DS.ScenarioKey
+group by DS.ScenarioName
+having DS.ScenarioName <> 'Forecast'
 
 =========================
       Exercício 08
 =========================
-
-SELECT * FROM FactStrategyPlan
-
-SELECT DISTINCT 
-
-Datekey AS 'Ano',
-FORMAT(sum(amount),'c') AS 'Total'
-
-FROM FactStrategyPlan
-GROUP BY Datekey
-HAVING Datekey in('2007','2008','2009')
+select
+    year(DateKey) as Ano,
+    sum(Amount) as Total
+from FactStrategyPlan
+group by year(DateKey)
 
 =========================
       Exercício 09
 =========================
-
-SELECT * FROM DimProduct
-SELECT * FROM DimProductSubcategory
-
-SELECT
-
-DPS.ProductSubcategoryName as NomeCategoria,
-COUNT (*) as QtdProdutos
-
-FROM DimProduct DP
-INNER JOIN DimProductSubcategory DPS
-ON DP.ProductSubcategoryKey = DPS.ProductSubcategoryKey
-WHERE BrandName = 'Contoso' and ColorName = 'Silver'
-GROUP BY DPS.ProductSubcategoryName
+select
+     ProductSubcategoryName as NomeCategoria,
+     count(ProductKey) as QtdProduto
+from DimProduct DP
+inner join DIMPRODUCTSUBCATEGORY DPC
+on DP.ProductSubcategoryKey = DPC.ProductSubcategoryKey
+where BrandName = 'Contoso' 
+and ColorName = 'Silver'
+group by  ProductSubcategoryName
 
 =========================
       Exercício 10
 =========================
+select
+     BrandName as Marca,
+     ProductSubcategoryName as NomeCategoria,
+     count(ProductKey) as QtdProduto
+from DimProduct DP
+inner join DIMPRODUCTSUBCATEGORY DPC
+on DP.ProductSubcategoryKey = DPC.ProductSubcategoryKey
+group by  ProductSubcategoryName,BrandName
+order by BrandName
 
-SELECT * FROM DimProduct
-SELECT * FROM DimProductSubcategory
 
-SELECT 
 
-      DP.BrandName,
-      DPS.ProductSubcategoryName,
-      COUNT (*) AS Qtd_Produtos
 
-FROM DimProduct DP
-INNER JOIN DimProductSubcategory DPS
-ON DP.ProductSubcategoryKey = DPS.ProductSubcategoryKey
-GROUP BY DP.BrandName,DPS.ProductSubcategoryName
-ORDER BY BrandName
