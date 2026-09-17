@@ -106,4 +106,3 @@ end
 select * from Carro
 
 exec prDeletar 5
-
